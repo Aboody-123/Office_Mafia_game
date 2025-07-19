@@ -18,10 +18,10 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	
+	# left and right
 	var direction := Input.get_axis("left", "right")
+	
 	if direction:
 		if (direction == 1):
 			facingRight = true
@@ -31,18 +31,28 @@ func _physics_process(delta: float) -> void:
 		state = 1
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		# handles walking
 		state = 0
-		
+	
+	# flips the animation when neccessary
 	if (facingRight):
 		$AnimatedSprite2D.flip_h = false
 	else:
 		$AnimatedSprite2D.flip_h = true
 	
+	# Plays animations when needed
 	if (state == 1):
 		$AnimatedSprite2D.play("walk")
-		print(1)
 	elif (state == 0):
 		$AnimatedSprite2D.play("idle")
-		print(2)
 	
 	move_and_slide()
+
+
+func _on_health_component_hurt() -> void:
+	print($HealthComponent.health)
+
+
+
+func _on_health_component_dead() -> void:
+	print("dead")

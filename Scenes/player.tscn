@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://f0jeb6ps1mo2"]
+[gd_scene load_steps=11 format=3 uid="uid://f0jeb6ps1mo2"]
 
 [ext_resource type="Script" uid="uid://bb1v3rogkpxn2" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dx1rrqkyemio4" path="res://Assets/Main Office Worker (temp).png" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cbpacjdf51nd1" path="res://Assets/MOF_walking_idle_spirtesheet.png" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://dxqmf65e6r3da" path="res://Scenes/Components/hitbox_component.tscn" id="4_vgqql"]
+[ext_resource type="PackedScene" uid="uid://venuja04yfma" path="res://Scenes/Components/health_component.tscn" id="5_fkybt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
 atlas = ExtResource("2_6t5aa")
@@ -37,6 +39,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_f1ek2"]
 radius = 3.16228
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fkybt"]
+radius = 160.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 8
 script = ExtResource("1_6t5aa")
@@ -52,3 +57,18 @@ shape = SubResource("CircleShape2D_f1ek2")
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.1, 0.1)
 zoom = Vector2(3, 3)
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_vgqql")]
+scale = Vector2(0.1, 0.1)
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_fkybt")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_fkybt")]
+scale = Vector2(1, 1)
+
+[connection signal="dead" from="HealthComponent" to="." method="_on_health_component_dead"]
+[connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
