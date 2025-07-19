@@ -4,9 +4,8 @@ extends Control
 
 
 func _on_play_pressed() -> void:
-	#change to main scene
-	pass
 
+	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 func _on_options_pressed() -> void:
 	print("options")
