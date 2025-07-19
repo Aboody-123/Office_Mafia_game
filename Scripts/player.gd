@@ -4,7 +4,9 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 # the states {0:idle, 1:walking/running, 2:attacking, 3:picking up
-
+var state = 0
+# where is it facing
+var facingRight = true
 
 
 
@@ -21,8 +23,26 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
 	if direction:
+		if (direction == 1):
+			facingRight = true
+		else:
+			facingRight = false
 		velocity.x = direction * SPEED
+		state = 1
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		state = 0
+		
+	if (facingRight):
+		$AnimatedSprite2D.flip_h = false
+	else:
+		$AnimatedSprite2D.flip_h = true
+	
+	if (state == 1):
+		$AnimatedSprite2D.play("walk")
+		print(1)
+	elif (state == 0):
+		$AnimatedSprite2D.play("idle")
+		print(2)
+	
 	move_and_slide()
