@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://f0jeb6ps1mo2"]
+[gd_scene load_steps=10 format=3 uid="uid://f0jeb6ps1mo2"]
 
+[ext_resource type="Script" uid="uid://bb1v3rogkpxn2" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dx1rrqkyemio4" path="res://Assets/Main Office Worker (temp).png" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cbpacjdf51nd1" path="res://Assets/MOF_walking_idle_spirtesheet.png" id="2_6t5aa"]
 
@@ -51,6 +52,8 @@ animations = [{
 radius = 3.16228
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 8
+script = ExtResource("1_6t5aa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8erm5")
