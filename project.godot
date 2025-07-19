@@ -11,5 +11,6 @@ config_version=5
 [application]
 
 config/name="Mafia_office_game"
+run/main_scene="uid://s36b62lj2yaj"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
