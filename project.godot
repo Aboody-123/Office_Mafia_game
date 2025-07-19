@@ -14,3 +14,10 @@ config/name="Mafia_office_game"
 run/main_scene="uid://s36b62lj2yaj"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Npc"
+2d_physics/layer_3="Computer/item"
+2d_physics/layer_4="Floor"
