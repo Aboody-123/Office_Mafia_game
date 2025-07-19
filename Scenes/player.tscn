@@ -1,16 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://f0jeb6ps1mo2"]
+[gd_scene load_steps=8 format=3 uid="uid://f0jeb6ps1mo2"]
 
 [ext_resource type="Script" uid="uid://bb1v3rogkpxn2" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dx1rrqkyemio4" path="res://Assets/Main Office Worker (temp).png" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cbpacjdf51nd1" path="res://Assets/MOF_walking_idle_spirtesheet.png" id="2_6t5aa"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
 atlas = ExtResource("2_6t5aa")
@@ -31,12 +23,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vgqql")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fkybt")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x3wgy")
 }, {
@@ -62,3 +48,7 @@ animation = &"walk"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_f1ek2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(0.1, 0.1)
+zoom = Vector2(3, 3)
