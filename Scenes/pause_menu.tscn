@@ -1,15 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://s36b62lj2yaj"]
+[gd_scene format=3 uid="uid://dnbfjods6w42e"]
 
-[ext_resource type="Script" uid="uid://b40aoqd0sabyt" path="res://Scripts/main_menu.gd" id="1_06t4h"]
-
-[node name="main_menu" type="Control"]
+[node name="pause_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_06t4h")
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
 layout_mode = 1
@@ -31,9 +28,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Play" type="Button" parent="BoxContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Play"
+text = "Resume"
 
 [node name="Options" type="Button" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -42,7 +39,3 @@ text = "Options"
 [node name="Quit" type="Button" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
-
-[connection signal="pressed" from="BoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="BoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="BoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
