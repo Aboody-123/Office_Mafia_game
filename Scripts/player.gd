@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 200
+const JUMP_VELOCITY = -300.0
 
 # the states {0:idle, 1:walking/running, 2:attacking, 3:picking up
 var state = 0
