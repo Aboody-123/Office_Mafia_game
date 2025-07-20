@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvpnc6j7mph0k"]
+[gd_scene load_steps=5 format=3 uid="uid://bvpnc6j7mph0k"]
 
 [ext_resource type="PackedScene" uid="uid://bcw2017fyc5q" path="res://Scenes/floor.tscn" id="1_bo1nx"]
+[ext_resource type="Script" uid="uid://g2hwv5t5061" path="res://Scenes/main.gd" id="1_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://f0jeb6ps1mo2" path="res://Scenes/player.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://dnbfjods6w42e" path="res://Scenes/pause_menu.tscn" id="4_kry3j"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_jjvhh")
 
 [node name="floor" parent="." instance=ExtResource("1_bo1nx")]
 
 [node name="Player" parent="." instance=ExtResource("2_8gbba")]
-position = Vector2(248, 51)
+position = Vector2(561, 315)
+
+[node name="pause_menu" parent="." instance=ExtResource("4_kry3j")]
+offset_left = 561.0
+offset_top = 288.0
+offset_right = 561.0
+offset_bottom = 288.0

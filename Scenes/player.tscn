@@ -68,7 +68,6 @@ health = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_fkybt")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fkybt")]
-scale = Vector2(1, 1)
 
 [connection signal="dead" from="HealthComponent" to="." method="_on_health_component_dead"]
 [connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
