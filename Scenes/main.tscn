@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvpnc6j7mph0k"]
+[gd_scene load_steps=5 format=3 uid="uid://bvpnc6j7mph0k"]
 
 [ext_resource type="PackedScene" uid="uid://bcw2017fyc5q" path="res://Scenes/floor.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://f0jeb6ps1mo2" path="res://Scenes/player.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://bslapgpqsfhh7" path="res://Scenes/death_zone.tscn" id="3_8gbba"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjvhh"]
+
+[node name="Game" type="Node2D"]
 
 [node name="floor" parent="." instance=ExtResource("1_bo1nx")]
 
 [node name="Player" parent="." instance=ExtResource("2_8gbba")]
-position = Vector2(248, 51)
+position = Vector2(-1, -88)
+
+[node name="Death_Zone" parent="." instance=ExtResource("3_8gbba")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death_Zone"]
+position = Vector2(0, 95)
+shape = SubResource("WorldBoundaryShape2D_jjvhh")
