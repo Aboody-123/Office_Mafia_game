@@ -36,11 +36,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f1ek2"]
-radius = 3.16228
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_fkybt"]
 radius = 160.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fkybt"]
+radius = 7.0
+height = 24.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 8
@@ -49,10 +50,6 @@ script = ExtResource("1_6t5aa")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"walk"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7)
-shape = SubResource("CircleShape2D_f1ek2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.1, 0.1)
@@ -69,6 +66,10 @@ health = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_fkybt")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fkybt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_fkybt")
 
 [connection signal="dead" from="HealthComponent" to="." method="_on_health_component_dead"]
 [connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
