@@ -1,0 +1,100 @@
+[gd_scene load_steps=15 format=3 uid="uid://cwppqqfw6tj2p"]
+
+[ext_resource type="Texture2D" uid="uid://d1c3e7mb74jip" path="res://Assets/Temporary Sprites/Small Iteams/Big Diamond Idle (18x14).png" id="1_5ghp3"]
+[ext_resource type="Script" uid="uid://oox6uufq82wf" path="res://Scripts/diamonds.gd" id="1_ca6c5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca6c5"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(0, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evts0"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(18, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1gtu"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(36, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gssgt"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(54, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4f86"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(72, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4sy2"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(90, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn5nc"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(108, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67fh7"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(126, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vub4m"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(144, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouutp"]
+atlas = ExtResource("1_5ghp3")
+region = Rect2(162, 0, 18, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f5osa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca6c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evts0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1gtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gssgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4f86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4sy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn5nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67fh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vub4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouutp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nnhxj"]
+radius = 7.0
+
+[node name="Diamonds" type="Area2D"]
+script = ExtResource("1_ca6c5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f5osa")
+autoplay = "default"
+frame_progress = 0.243898
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+scale = Vector2(0.889922, 0.6652)
+shape = SubResource("CircleShape2D_nnhxj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
