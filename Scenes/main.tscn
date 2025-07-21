@@ -13,8 +13,7 @@ script = ExtResource("1_jjvhh")
 [node name="Player" parent="." instance=ExtResource("2_8gbba")]
 position = Vector2(561, 315)
 
-[node name="pause_menu" parent="." instance=ExtResource("4_kry3j")]
-offset_left = 561.0
-offset_top = 288.0
-offset_right = 561.0
-offset_bottom = 288.0
+[node name="pause_menu" parent="Player" instance=ExtResource("4_kry3j")]
+process_mode = 3
+offset_top = -24.0
+offset_bottom = -24.0
