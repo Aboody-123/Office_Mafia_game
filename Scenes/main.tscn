@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bvpnc6j7mph0k"]
 
 [ext_resource type="PackedScene" uid="uid://bcw2017fyc5q" path="res://Scenes/floor.tscn" id="1_bo1nx"]
-[ext_resource type="Script" uid="uid://g2hwv5t5061" path="res://Scenes/main.gd" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://g2hwv5t5061" path="res://main.gd" id="1_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://f0jeb6ps1mo2" path="res://Scenes/player.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dnbfjods6w42e" path="res://Scenes/pause_menu.tscn" id="4_kry3j"]
 
@@ -14,6 +14,5 @@ script = ExtResource("1_jjvhh")
 position = Vector2(561, 315)
 
 [node name="pause_menu" parent="Player" instance=ExtResource("4_kry3j")]
-process_mode = 3
 offset_top = -24.0
 offset_bottom = -24.0
