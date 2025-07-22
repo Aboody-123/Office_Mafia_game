@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvpnc6j7mph0k"]
+[gd_scene load_steps=6 format=3 uid="uid://bvpnc6j7mph0k"]
 
 [ext_resource type="PackedScene" uid="uid://bcw2017fyc5q" path="res://Scenes/floor.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://f0jeb6ps1mo2" path="res://Scenes/player.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://bslapgpqsfhh7" path="res://Scenes/death_zone.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://dnbfjods6w42e" path="res://Scenes/pause_menu.tscn" id="3_jjvhh"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjvhh"]
 
@@ -12,6 +13,12 @@
 
 [node name="Player" parent="." instance=ExtResource("2_8gbba")]
 position = Vector2(-1, -88)
+
+[node name="pause_menu" parent="Player" instance=ExtResource("3_jjvhh")]
+offset_left = -2.0
+offset_top = -7.0
+offset_right = -2.0
+offset_bottom = -7.0
 
 [node name="Death_Zone" parent="." instance=ExtResource("3_8gbba")]
 
