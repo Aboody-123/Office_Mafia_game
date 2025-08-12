@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bvpnc6j7mph0k"]
+[gd_scene load_steps=18 format=4 uid="uid://bvpnc6j7mph0k"]
 
 [ext_resource type="Script" uid="uid://q4wnamn46cnl" path="res://Scripts/game_manager.gd" id="1_6bp64"]
 [ext_resource type="PackedScene" uid="uid://f0jeb6ps1mo2" path="res://Scenes/player.tscn" id="2_8gbba"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cwhj4hed5y381" path="res://Scenes/platform_large.tscn" id="5_21xkr"]
 [ext_resource type="Texture2D" uid="uid://eap6mgc53qsg" path="res://Assets/Temporary Sprites/Tile Sets/Decorations (32x32).png" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://cwppqqfw6tj2p" path="res://Scenes/diamonds.tscn" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://drc4634y48eru" path="res://Scenes/melee_npc.tscn" id="8_344ge"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjvhh"]
 
@@ -194,8 +195,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_8gbba"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 2
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_kry3j")
 
 [sub_resource type="Animation" id="Animation_kry3j"]
@@ -234,6 +235,11 @@ _data = {
 &"Moving": SubResource("Animation_kry3j"),
 &"RESET": SubResource("Animation_21xkr")
 }
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_344ge"]
+vertices = PackedVector2Array(491.961, 71.9531, -165.781, 69.0391, -160.203, -197.008, 491.031, -197.977)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-170, -207, -176, 79, 502, 82, 501, -208)])
 
 [node name="Game" type="Node2D"]
 
@@ -294,3 +300,10 @@ position = Vector2(739, -14)
 
 [node name="Diamonds7" parent="Diamond_Collectable" instance=ExtResource("6_21xkr")]
 position = Vector2(245, -23)
+
+[node name="MeleeNPC" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(76, -52)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(76, -52)
+navigation_polygon = SubResource("NavigationPolygon_344ge")
