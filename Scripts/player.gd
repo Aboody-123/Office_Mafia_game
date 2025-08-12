@@ -56,3 +56,8 @@ func _on_health_component_hurt() -> void:
 
 func _on_health_component_dead() -> void:
 	print("dead")
+
+
+# IMPORTANT MUST NOT BE DELETED
+func isPlayer():
+	pass
