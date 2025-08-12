@@ -156,8 +156,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_21xkr"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 2
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_jjvhh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
@@ -244,7 +244,6 @@ script = ExtResource("1_6bp64")
 [node name="Player" parent="." instance=ExtResource("2_8gbba")]
 z_index = 1
 position = Vector2(-1, -88)
-collision_mask = 2
 
 [node name="Death_Zone" parent="." instance=ExtResource("3_8gbba")]
 
