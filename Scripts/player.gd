@@ -2,10 +2,10 @@
 extends CharacterBody2D
 
 var speed = 150.0
+var dash = 1000.0
+var dash_direction = 1
 const JUMP_VELOCITY = -300.0
-var sprint = 200
-# the states {0:idle, 1:walking/running, 2:attacking, 3:picking up
-enum States { IDLE, WALKING, SPRINTING, JUMPING, FALLING }
+enum States { IDLE, WALKING, DASHING, JUMPING, FALLING }
 var state = States.IDLE
 var direction 
 var gravity = 9
@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
 	handle_state_transitions()
 	perform_state_actions(delta)
 	move_and_slide()
+	
 
 
 func _on_health_component_hurt() -> void:
@@ -41,7 +42,7 @@ func handle_state_transitions():
 	
 	if Input.is_action_just_released("jump") and jump_released == false:
 		#cancels jump early when let go
-		velocity.y = 0
+		
 		state = States.FALLING
 		#jump_released ensures that releasing jump only once will cancel the jump. 
 		#otherwise when spammed it caused a floating bug
@@ -55,8 +56,11 @@ func handle_state_transitions():
 		#resets jump_released so that you can still cancel jumps
 		jump_released = false
 		
-	if Input.is_action_pressed("sprint") and direction:
-		state = States.SPRINTING
+	if Input.is_action_just_pressed("dash"):
+		state = States.DASHING
+		velocity.x += lerp(velocity.x, dash * dash_direction, 0.5)
+		#dash * dash_direction
+		print("dash")
 	
 func perform_state_actions(delta):
 	match state:
@@ -68,8 +72,10 @@ func perform_state_actions(delta):
 			
 			if direction > 0:
 				$AnimatedSprite2D.flip_h = false
+				dash_direction = direction
 			elif direction < 0:
 				$AnimatedSprite2D.flip_h = true
+				dash_direction = direction
 			velocity.x = speed * direction
 		
 		States.JUMPING:
@@ -77,14 +83,8 @@ func perform_state_actions(delta):
 			#add animation
 			
 		States.FALLING:
-			pass
+			velocity += get_gravity() * delta
 			#add animation
 			
-		States.SPRINTING:
-			velocity.x = sprint * direction
-			$AnimatedSprite2D.play("walk")
-			if direction > 0:
-				$AnimatedSprite2D.flip_h = false
-			elif direction < 0:
-				$AnimatedSprite2D.flip_h = true
-			
+		States.DASHING:
+			pass
