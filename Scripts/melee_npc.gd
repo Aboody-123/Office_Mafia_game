@@ -15,7 +15,7 @@ var player:CharacterBody2D;
 
 func _ready():
 	state = States.IDLE;
-	#$DamageComponent/CollisionShape2D.disabled = true
+	$DamageComponent/CollisionShape2D.disabled = true
 	
 func _process(delta: float) -> void:
 	stateMachine(delta)
@@ -52,8 +52,7 @@ func stateMachine(delta):
 		States.FOLLOWING:
 			$AnimatedSprite2D.play("run");
 			
-			nav.target_position.x = player.position.x;
-			nav.target_position.y = global_position.y;
+			nav.target_position = player.position;
 			var next_path_position = nav.get_next_path_position();
 			var direction = global_position.direction_to(next_path_position);
 			velocity.x = direction.x * speed;
