@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const speed = 50;
+const JUMP_VELOCITY = -320.0;
 
 '''I need to find a way that it only follows the x direction of the player'''
 
@@ -10,6 +11,8 @@ var target = 0;
 var facingLeft;
 var attacking = false;
 var player:CharacterBody2D;
+var prevPos = position.x;
+
 
 @onready var nav = $NavigationAgent2D;
 
@@ -17,8 +20,9 @@ func _ready():
 	state = States.IDLE;
 	$DamageComponent/CollisionShape2D.disabled = true
 	
+
 func _process(delta: float) -> void:
-	stateMachine(delta)
+	stateMachine(delta);
 	
 	move_and_slide();
 	
@@ -56,6 +60,13 @@ func stateMachine(delta):
 			var next_path_position = nav.get_next_path_position();
 			var direction = global_position.direction_to(next_path_position);
 			velocity.x = direction.x * speed;
+			
+			if (int(position.x/0.1) == int(prevPos/0.1) and is_on_floor()):
+				velocity.y += JUMP_VELOCITY;
+				print(1)
+			prevPos = position.x
+			
+			
 		# hitting the player
 		
 		States.HITTING:
