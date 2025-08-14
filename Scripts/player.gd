@@ -10,17 +10,18 @@ var state = States.IDLE
 var direction 
 var gravity = 9
 var jump_released = false
-
+var can_dash = true
 
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and state != States.DASHING:
 		velocity += get_gravity() * delta
 		
 	handle_state_transitions()
 	perform_state_actions(delta)
 	move_and_slide()
+	
 	
 
 
@@ -56,11 +57,15 @@ func handle_state_transitions():
 		#resets jump_released so that you can still cancel jumps
 		jump_released = false
 		
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and can_dash == true:
 		state = States.DASHING
-		velocity.x += lerp(velocity.x, dash * dash_direction, 0.5)
-		#dash * dash_direction
+		velocity.x = dash * dash_direction
+		
+		#timer controls length of dash
+		$dash_timer.start()
+		
 		print("dash")
+		can_dash = false
 	
 func perform_state_actions(delta):
 	match state:
@@ -88,3 +93,14 @@ func perform_state_actions(delta):
 			
 		States.DASHING:
 			pass
+			
+		
+	
+func _on_dash_timer_timeout() -> void:
+	
+	$dash_cooldown.start()
+	state = States.IDLE
+	
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true
