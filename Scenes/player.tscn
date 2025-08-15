@@ -52,11 +52,6 @@ script = ExtResource("1_6t5aa")
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"walk"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(0.1, 0.1)
-zoom = Vector2(3, 3)
-limit_bottom = 55
-
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_vgqql")]
 scale = Vector2(0.1, 0.1)
 collision_layer = 0

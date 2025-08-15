@@ -10,8 +10,10 @@ var health = max_health
 func _process(delta: float) -> void:
 	#taking damage for testing purposes
 	if Input.is_action_just_pressed("TakeDmg"):
-		takeDamage(10)
+		takeDamage(20)
+
 # a function to deal with taking damage
+
 func takeDamage(dam):
 	health -= dam
 	if (health <= 0):

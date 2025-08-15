@@ -11,6 +11,9 @@ var direction
 var gravity = 9
 var jump_released = false
 
+@onready var death_panel: Control = $"Camera2D2/CanvasLayer/Death Panel"
+
+
 
 
 func _physics_process(delta: float) -> void:
@@ -29,7 +32,7 @@ func _on_health_component_hurt() -> void:
 
 
 func _on_health_component_dead() -> void:
-	print("dead")
+	pass
 	
 func handle_state_transitions():
 	
@@ -87,4 +90,5 @@ func perform_state_actions(delta):
 				$AnimatedSprite2D.flip_h = false
 			elif direction < 0:
 				$AnimatedSprite2D.flip_h = true
-			
+		
+		
