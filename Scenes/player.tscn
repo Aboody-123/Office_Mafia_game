@@ -72,5 +72,14 @@ shape = SubResource("CircleShape2D_fkybt")
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_fkybt")
 
+[node name="dash_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="dash_cooldown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="dead" from="HealthComponent" to="." method="_on_health_component_dead"]
 [connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
