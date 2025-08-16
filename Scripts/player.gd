@@ -16,6 +16,7 @@ var can_dash = true
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor() and state != States.DASHING:
+		#cancels gravity while dashing
 		velocity += get_gravity() * delta
 		
 	if state != States.DASHING:
@@ -62,6 +63,8 @@ func handle_state_transitions():
 	if Input.is_action_just_pressed("dash") and can_dash == true:
 		state = States.DASHING
 		velocity.x = dash * dash_direction
+		#dash direction is the last direction moved by the player. this 
+		#allows the player to dash even without directional inpot
 		
 		#timer controls length of dash
 		$dash_timer.start()
@@ -95,14 +98,16 @@ func perform_state_actions(delta):
 			
 		States.DASHING:
 			pass
-			
+			#add animation
 		
 	
 func _on_dash_timer_timeout() -> void:
 	
 	$dash_cooldown.start()
 	state = States.IDLE
+	#stops the dash after the timer
 	
 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
+	#prevents spam dashing
