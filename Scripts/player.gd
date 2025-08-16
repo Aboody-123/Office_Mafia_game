@@ -18,7 +18,9 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor() and state != States.DASHING:
 		velocity += get_gravity() * delta
 		
-	handle_state_transitions()
+	if state != States.DASHING:
+		#while dashing you cannot change direction or cancel the dash early, fixes certain bugs
+		handle_state_transitions()
 	perform_state_actions(delta)
 	move_and_slide()
 	
