@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://drc4634y48eru"]
+[gd_scene load_steps=34 format=3 uid="uid://drc4634y48eru"]
 
 [ext_resource type="Script" uid="uid://dqm3acj83aqeg" path="res://Scripts/melee_npc.gd" id="1_l0xqy"]
 [ext_resource type="Texture2D" uid="uid://dvt1hcx023to" path="res://Assets/Temporary Sprites/Enemy/Idle (34x28).png" id="1_y1lm4"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cvws0r5f5b3n6" path="res://Assets/Temporary Sprites/Enemy/Run (34x28).png" id="5_0m3t0"]
 [ext_resource type="PackedScene" uid="uid://bd0qsb7ge2fcc" path="res://Scenes/Components/search_component.tscn" id="7_vnep2"]
 [ext_resource type="PackedScene" uid="uid://bx6di2dykeke7" path="res://Scenes/Components/interaction_component.tscn" id="8_7kact"]
-[ext_resource type="PackedScene" uid="uid://blpg874rq6jfb" path="res://Scenes/Components/damage_component.tscn" id="9_7kact"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ah1cv"]
 atlas = ExtResource("1_y1lm4")
@@ -195,20 +194,13 @@ radius = 137.321
 radius = 7.0
 height = 20.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0m3t0"]
-radius = 6.0
-
 [node name="MeleeNPC" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_l0xqy")
 
-[node name="JumpAgent" type="NavigationAgent2D" parent="."]
-target_desired_distance = 15.0
-navigation_layers = 2
-debug_path_custom_color = Color(0.931355, 0.898705, 0.489797, 1)
-
-[node name="WalkAgent" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 debug_path_custom_color = Color(0.815259, 0.207628, 0.418306, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -235,18 +227,7 @@ position = Vector2(-5, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0m3t0")
 
-[node name="DamageTimer" type="Timer" parent="."]
-
-[node name="DamageComponent" parent="." instance=ExtResource("9_7kact")]
-collision_layer = 2
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageComponent"]
-position = Vector2(-10, -2)
-shape = SubResource("CircleShape2D_0m3t0")
-disabled = true
+[node name="jumpCooldown" type="Timer" parent="."]
 
 [connection signal="found" from="SearchComponent" to="." method="_on_search_component_found"]
-[connection signal="body_entered" from="InteractionComponent" to="." method="_on_interaction_component_body_entered"]
-[connection signal="body_exited" from="InteractionComponent" to="." method="_on_interaction_component_body_exited"]
-[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="jumpCooldown" to="." method="_on_jump_cooldown_timeout"]
