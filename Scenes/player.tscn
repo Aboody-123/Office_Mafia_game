@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://f0jeb6ps1mo2"]
+[gd_scene load_steps=12 format=3 uid="uid://f0jeb6ps1mo2"]
 
 [ext_resource type="Script" uid="uid://bb1v3rogkpxn2" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dx1rrqkyemio4" path="res://Assets/Main Office Worker (temp).png" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cbpacjdf51nd1" path="res://Assets/MOF_walking_idle_spirtesheet.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://dxqmf65e6r3da" path="res://Scenes/Components/hitbox_component.tscn" id="4_vgqql"]
 [ext_resource type="PackedScene" uid="uid://venuja04yfma" path="res://Scenes/Components/health_component.tscn" id="5_fkybt"]
+[ext_resource type="PackedScene" uid="uid://dnbfjods6w42e" path="res://Scenes/pause_menu.tscn" id="6_x3wgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
 atlas = ExtResource("2_6t5aa")
@@ -55,6 +56,15 @@ limit_top = -290
 limit_right = 600
 limit_bottom = 60
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+visible = false
+
+[node name="pause_menu" parent="Camera2D/CanvasLayer" instance=ExtResource("6_x3wgy")]
+offset_left = 3.0
+offset_top = 7.0
+offset_right = 3.0
+offset_bottom = 7.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"walk"
@@ -79,6 +89,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="dash_cooldown" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [connection signal="dead" from="HealthComponent" to="." method="_on_health_component_dead"]
