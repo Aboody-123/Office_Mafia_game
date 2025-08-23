@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var speed = 50
+var speed = 100
 const JUMP_VELOCITY = -300.0
 
 enum States {IDLE, FOLLOW, JUMP, ATTACK};
@@ -109,7 +109,8 @@ func stateMachine():
 		States.JUMP:
 			nav_agent_jump.target_position = jumpTarget
 			# speed
-			speed = 200
+			speed = 150
+			
 			
 			# is it nearing the end target
 			if (int(position.x/10) == int(jumpTarget.x/10)):
