@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bvpnc6j7mph0k"]
+[gd_scene load_steps=20 format=4 uid="uid://bvpnc6j7mph0k"]
 
 [ext_resource type="Script" uid="uid://q4wnamn46cnl" path="res://Scripts/game_manager.gd" id="1_6bp64"]
 [ext_resource type="PackedScene" uid="uid://f0jeb6ps1mo2" path="res://Scenes/player.tscn" id="2_8gbba"]
@@ -8,6 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://eap6mgc53qsg" path="res://Assets/Temporary Sprites/Tile Sets/Decorations (32x32).png" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://cwppqqfw6tj2p" path="res://Scenes/diamonds.tscn" id="6_21xkr"]
 [ext_resource type="PackedScene" uid="uid://drc4634y48eru" path="res://Scenes/melee_npc.tscn" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://cjdaxnxwx13ne" path="res://Scenes/Components/jump_component.tscn" id="9_ynf5e"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_344ge"]
+vertices = PackedVector2Array(48.8281, -33.0703, 30.0469, -32.4063, 33.1797, -49.5938, 51.4766, -66.5469, 94.9922, 29.3984, 92.9922, 31.1797, 77.2266, 31.9688, 67, 30.9531, 67, 19.8594, 69.5391, 15.7891, 79.2813, 8.22656, 92.0781, 15.7813, 50.5469, -82.2734, 7.71094, -62.3203, 12.2266, -79.7734, 20.8438, -92.2969, 40.3281, -102.563, 126.727, -3.46875, 127.398, -26.2969, 137.578, -24.5, 139.078, -3.5625, 129, 21.5469, 146.711, 31.2266, 135.469, 38.1875, 129, 36.3906, 100.328, 7.53125, 84.7266, -5.40625, 111.594, -32.0469, 94.4922, -58.8281, 106.367, -43.7813, 78.2188, -11.9063, 64.8594, -26.3906, 93.7578, -100.523, 79.6797, -91.1406, 52.9063, -125.633, 66.2422, -137.289, 101.672, -150.703, 141.172, -127.32, 121.352, -158.797, 228.313, -151, 144.133, -189.172, 196.641, -190.977, 222.352, -188.57, 231.578, -168.672)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9, 10, 11), PackedInt32Array(12, 3, 2, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 21, 20), PackedInt32Array(25, 11, 10, 26, 27), PackedInt32Array(27, 18, 17, 25), PackedInt32Array(28, 29, 27, 26, 30, 31, 3), PackedInt32Array(3, 31, 0), PackedInt32Array(32, 33, 12, 16, 34, 35, 36), PackedInt32Array(37, 32, 36, 38), PackedInt32Array(39, 37, 38, 40, 41, 42, 43)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(61, -75, 84, -82, 99, -92, 145, -118, 237, -143, 242, -170, 229, -198, 197, -201, 139, -199, 115, -167, 98, -160, 61, -146, 45, -132, 33, -110, 14, -100, 3, -84, -4, -57, 22, -44, 18, -22, 47, -23, 59, -18, 71, -5, 73, -3, 71, 2, 62, 9, 57, 17, 57, 40, 77, 42, 97, 41, 106, 33, 103, 19, 106, 16, 118, 11, 119, 22, 119, 44, 137, 49, 158, 36, 149, -5, 147, -33, 130, -36, 119, -40, 115, -49, 100, -68)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ynf5e"]
+vertices = PackedVector2Array(139.203, -22.4922, 139.258, -23.3672, 145.719, 31.6719, 147, -126.797, 147, -123.203, 137.188, -130.07, 129.492, -104.492, 99.1484, -91.0938, 99.5625, -93.5469, 125.867, -122.672, 70.4688, -59.4375, 82.3516, -61.9766, 83.2188, -25.5078, 61.6719, -28.8125, 129.289, 31.2188, 123.422, 0.867188, 94.0703, -13.2578, -94, 30.0391, -94, -30.4766, 25.3672, -13.5625, 26.5078, 8, 93.8906, 30.9531, 75.1719, 8, 93.9297, -0.53125, 96.9922, -2.0625, -96, -255.969, 317.719, -255.023, 315.25, -162.922, 191.641, -161.922, -96, -70.5391, 190.438, -143.969, 30.6484, -31.3906, 26.1172, -41.5781, 38.3438, -64.25, 39.1094, -76.5469, 41.0938, -90.2969, 72.5938, -97.1406)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13), PackedInt32Array(0, 2, 14, 15), PackedInt32Array(12, 0, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 17, 20, 22), PackedInt32Array(21, 22, 23), PackedInt32Array(24, 21, 23, 16), PackedInt32Array(25, 26, 27, 28), PackedInt32Array(29, 25, 28, 30, 5), PackedInt32Array(15, 24, 16), PackedInt32Array(12, 16, 13), PackedInt32Array(10, 13, 31, 32, 33), PackedInt32Array(34, 10, 33), PackedInt32Array(34, 33, 29), PackedInt32Array(35, 34, 29), PackedInt32Array(9, 8, 36), PackedInt32Array(30, 3, 5), PackedInt32Array(36, 35, 29, 5, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-104, -42, -104, 40, 103, 41, 106, 9, 115, 10, 121, 41, 157, 42, 140, -103, 137, -118, 157, -104, 157, -120, 200, -137, 201, -152, 325, -153, 328, -265, -106, -266, -106, -61, 22, -55, 15, -42, 23, -24), PackedVector2Array(86, -73, 72, -70, 50, -82, 73, -87, 88, -85), PackedVector2Array(73, -2, 36, -2, 35, -21, 59, -19, 84, -7), PackedVector2Array(135, -96, 130, -33, 93, -35, 92, -77)])
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjvhh"]
 
@@ -236,12 +247,15 @@ _data = {
 &"RESET": SubResource("Animation_21xkr")
 }
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_344ge"]
-vertices = PackedVector2Array(20, -14.6875, 56.0781, -42.7109, 72, -41.3828, 72, 83.7969, 52.6719, 51.2422, 20, -48.5313, 51.6719, -78, 18.4063, 56.5078, 20.1563, 82.8125, -170.031, 79.1797, -43.25, 50.3594, -8.21094, 52.8672, 113.578, -109.922, 114.578, -86, 72, -86, -170.961, -202.922, 50.8828, 83.3984, -14, -12.2578, -13.4219, 19, -170.219, 20.9766, -45.6094, 22.0625, -43, 19, -43, -11.5, 241.813, -200.07, 240.172, -110.922, -170.352, -17.9688, 72, -78, -14, -43.6719)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(1, 0, 5, 6), PackedInt32Array(7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(3, 16, 4), PackedInt32Array(17, 0, 4, 7, 11, 18), PackedInt32Array(9, 19, 20, 10), PackedInt32Array(17, 18, 21, 22), PackedInt32Array(15, 23, 24, 12), PackedInt32Array(25, 15, 14, 6), PackedInt32Array(14, 26, 6), PackedInt32Array(27, 17, 22, 25), PackedInt32Array(27, 25, 6), PackedInt32Array(27, 6, 5)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-181, -213, -180, 89, 82, 94, 82, -76, 125, -76, 124, -100, 250, -101, 252, -210), PackedVector2Array(10, -24, -4, -23, -4, -35, 10, -37), PackedVector2Array(42, 63, 41, 81, 30, 80, 29, 65), PackedVector2Array(-20, 42, -34, 41, -35, 29, -22, 29), PackedVector2Array(-53, 12, -169, 11, -171, -8, -53, -2), PackedVector2Array(77, -51, 65, -52, 63, -68, 75, -68)])
-
 [node name="Game" type="Node2D"]
+
+[node name="Jump" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_344ge")
+navigation_layers = 2
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_ynf5e")
 
 [node name="game_manager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -278,7 +292,7 @@ autoplay = "Moving"
 [node name="Diamond_Collectable" type="Node" parent="."]
 
 [node name="Diamonds" parent="Diamond_Collectable" instance=ExtResource("6_21xkr")]
-position = Vector2(170, -10)
+position = Vector2(193, -11)
 
 [node name="Diamonds2" parent="Diamond_Collectable" instance=ExtResource("6_21xkr")]
 position = Vector2(387, -166)
@@ -299,12 +313,50 @@ position = Vector2(739, -14)
 position = Vector2(245, -23)
 
 [node name="MeleeNPC" parent="." instance=ExtResource("8_344ge")]
-position = Vector2(-50, -91)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(76, -52)
-navigation_polygon = SubResource("NavigationPolygon_344ge")
+position = Vector2(-20, -76)
 
 [node name="Player" parent="." instance=ExtResource("2_8gbba")]
 z_index = 1
-position = Vector2(-34, -118)
+position = Vector2(-61, -77)
+
+[node name="JumpComponent3" parent="." instance=ExtResource("9_ynf5e")]
+position = Vector2(33, -33)
+
+[node name="A" type="Marker2D" parent="JumpComponent3"]
+position = Vector2(-20, -33)
+
+[node name="JumpComponent" parent="." instance=ExtResource("9_ynf5e")]
+position = Vector2(95, 30)
+
+[node name="A" type="Marker2D" parent="JumpComponent"]
+position = Vector2(20, -32)
+
+[node name="JumpComponent2" parent="." instance=ExtResource("9_ynf5e")]
+position = Vector2(135, 27)
+
+[node name="A" type="Marker2D" parent="JumpComponent2"]
+position = Vector2(-25, -29)
+
+[node name="JumpComponent4" parent="." instance=ExtResource("9_ynf5e")]
+position = Vector2(27, -67)
+
+[node name="A" type="Marker2D" parent="JumpComponent4"]
+position = Vector2(44, -30)
+
+[node name="JumpComponent6" parent="." instance=ExtResource("9_ynf5e")]
+position = Vector2(155, -132)
+
+[node name="A" type="Marker2D" parent="JumpComponent6"]
+position = Vector2(48, -33)
+
+[node name="JumpComponent7" parent="." instance=ExtResource("9_ynf5e")]
+position = Vector2(90, -101)
+
+[node name="A" type="Marker2D" parent="JumpComponent7"]
+position = Vector2(46, -32)
+
+[node name="JumpComponent5" parent="." instance=ExtResource("9_ynf5e")]
+position = Vector2(100, -3)
+
+[node name="A" type="Marker2D" parent="JumpComponent5"]
+position = Vector2(-42, -31)
