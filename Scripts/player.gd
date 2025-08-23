@@ -10,7 +10,14 @@ var state = States.IDLE
 var direction 
 var gravity = 9
 var jump_released = false
+<<<<<<< HEAD
 var can_dash = true
+=======
+
+@onready var death_panel: Control = $"Camera2D2/CanvasLayer/Death Panel"
+
+
+>>>>>>> Ui
 
 
 func _physics_process(delta: float) -> void:
@@ -34,7 +41,7 @@ func _on_health_component_hurt() -> void:
 
 
 func _on_health_component_dead() -> void:
-	print("dead")
+	pass
 	
 func handle_state_transitions():
 	
@@ -96,6 +103,7 @@ func perform_state_actions(delta):
 			velocity += get_gravity() * delta
 			#add animation
 			
+<<<<<<< HEAD
 		States.DASHING:
 			pass
 			#add animation
@@ -111,3 +119,14 @@ func _on_dash_timer_timeout() -> void:
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 	#prevents spam dashing
+=======
+		States.SPRINTING:
+			velocity.x = sprint * direction
+			$AnimatedSprite2D.play("walk")
+			if direction > 0:
+				$AnimatedSprite2D.flip_h = false
+			elif direction < 0:
+				$AnimatedSprite2D.flip_h = true
+		
+		
+>>>>>>> Ui
