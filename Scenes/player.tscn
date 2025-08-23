@@ -56,10 +56,10 @@ limit_top = -290
 limit_right = 600
 limit_bottom = 60
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+[node name="PauseMenuCanvasLayer" type="CanvasLayer" parent="Camera2D"]
 visible = false
 
-[node name="pause_menu" parent="Camera2D/CanvasLayer" instance=ExtResource("6_x3wgy")]
+[node name="pause_menu" parent="Camera2D/PauseMenuCanvasLayer" instance=ExtResource("6_x3wgy")]
 offset_left = 3.0
 offset_top = 7.0
 offset_right = 3.0
