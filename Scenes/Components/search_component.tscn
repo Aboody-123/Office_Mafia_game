@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd0qsb7ge2fcc"]
+
+[ext_resource type="Script" uid="uid://bhd5o27sbjgrp" path="res://Scripts/search_component.gd" id="1_uuemu"]
+
+[node name="SearchComponent" type="Area2D"]
+script = ExtResource("1_uuemu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

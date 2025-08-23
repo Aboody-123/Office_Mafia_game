@@ -4,7 +4,8 @@ extends Area2D
 @onready var death_panel: Control = $"../Player/Camera2D2/CanvasLayer/Death Panel"
 
 func _on_body_entered(body: Node2D) -> void:
-	print("WASTED")
+	if (body.has_method("isPlayer")):
+		print("wasted")
 	Engine.time_scale = 0.5
 	body.get_node("CollisionShape2D").queue_free()
 	death_panel.visible = true
