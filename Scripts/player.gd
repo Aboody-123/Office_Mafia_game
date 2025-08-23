@@ -119,6 +119,6 @@ func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 	#prevents spam dashing
 
-		
-		
-		
+
+func isPlayer():
+	pass
