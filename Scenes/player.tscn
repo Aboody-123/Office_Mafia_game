@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://f0jeb6ps1mo2"]
+[gd_scene load_steps=13 format=3 uid="uid://f0jeb6ps1mo2"]
 
 [ext_resource type="Script" uid="uid://bb1v3rogkpxn2" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dx1rrqkyemio4" path="res://Assets/Main Office Worker (temp).png" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cbpacjdf51nd1" path="res://Assets/MOF_walking_idle_spirtesheet.png" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://32cd7kgx7wob" path="res://Scenes/death_panel.tscn" id="3_3smsa"]
 [ext_resource type="PackedScene" uid="uid://dxqmf65e6r3da" path="res://Scenes/Components/hitbox_component.tscn" id="4_vgqql"]
 [ext_resource type="PackedScene" uid="uid://venuja04yfma" path="res://Scenes/Components/health_component.tscn" id="5_fkybt"]
 [ext_resource type="PackedScene" uid="uid://dnbfjods6w42e" path="res://Scenes/pause_menu.tscn" id="6_x3wgy"]
@@ -65,6 +66,10 @@ offset_top = 7.0
 offset_right = 3.0
 offset_bottom = 7.0
 
+[node name="DeathPanelCanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Death Panel" parent="Camera2D/DeathPanelCanvasLayer" instance=ExtResource("3_3smsa")]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"walk"
@@ -92,7 +97,10 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="death_timer" type="Timer" parent="."]
+
 [connection signal="dead" from="HealthComponent" to="." method="_on_health_component_dead"]
 [connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]

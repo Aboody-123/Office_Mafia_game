@@ -11,13 +11,15 @@ var direction
 var gravity = 9
 var jump_released = false
 
+var dead = false
+
 var can_dash = true
+@onready var death_timer = $death_timer
+@onready var death_panel: Control = $"Camera2D/DeathPanelCanvasLayer/Death Panel"
 
 
-@onready var death_panel: Control = $"Camera2D2/CanvasLayer/Death Panel"
-
-
-
+func _ready() -> void:
+	death_panel.hide()
 
 
 func _physics_process(delta: float) -> void:
@@ -41,7 +43,11 @@ func _on_health_component_hurt() -> void:
 
 
 func _on_health_component_dead() -> void:
-	pass
+	if (!dead):
+		dead = true
+		death_panel.visible = true
+		Engine.time_scale = 0.5
+		death_timer.start(2)
 	
 func handle_state_transitions():
 	
@@ -122,3 +128,9 @@ func _on_dash_cooldown_timeout() -> void:
 
 func isPlayer():
 	pass
+
+
+func _on_death_timer_timeout() -> void:
+	print(1)
+	Engine.time_scale = 1.0
+	get_tree().reload_current_scene()
