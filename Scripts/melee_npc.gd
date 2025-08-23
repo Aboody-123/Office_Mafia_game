@@ -1,97 +1,174 @@
 extends CharacterBody2D
 
-const speed = 50;
-const JUMP_VELOCITY = -320.0;
 
-'''I need to find a way that it only follows the x direction of the player'''
+var speed = 50
+const JUMP_VELOCITY = -300.0
 
-enum States {IDLE, IDLEWALKING, FOLLOWING, HITTING, HURT, DEAD}
-var state = 0;
-var target = 0;
-var facingLeft;
-var attacking = false;
-var player:CharacterBody2D;
-var prevPos = position.x;
+enum States {IDLE, FOLLOW, JUMP, ATTACK};
+var state = States.IDLE;
 
+# can it jump is it in position
+var canJump = false;
+# is it jumping
+var jumping = false
+# jump target
+var jumpTarget = Vector2.ZERO;#
+# attacking
+var attacking = false
+# navigation
+@onready var nav_agent_walk = $WalkAgent;
+@onready var nav_agent_jump = $JumpAgent;
+# player to follow
+var playerTarget:CharacterBody2D;
 
-@onready var nav = $NavigationAgent2D;
+# is it facing left or right for animation purposes
+var facingRight = false;
 
-func _ready():
-	state = States.IDLE;
-	$DamageComponent/CollisionShape2D.disabled = true
-	
+func _physics_process(delta: float):
+	# states
+	stateMachine();
 
-func _process(delta: float) -> void:
-	stateMachine(delta);
-	
-	move_and_slide();
-	
-func stateMachine(delta):
-	# Add the gravity.
-	if not is_on_floor():
+	# succumbs to gravity
+	if (!is_on_floor()):
 		velocity += get_gravity() * delta
+		
+	# deals with facingRight
+	if (velocity.x < 0):
+		facingRight = false;
+	elif(velocity.x > 0):
+		facingRight = true;
 	
-	if (velocity.x <0):
-		facingLeft = true;
-	elif (velocity.x > 0):
-		facingLeft = false;
-	
-	$AnimatedSprite2D.flip_h = !facingLeft;
-	
-	if (facingLeft):
-		$InteractionComponent.position.x = -10
-		$DamageComponent.position.x = -12
+	# deals with orientation is it looking left or right
+	if (facingRight):
+		$AnimatedSprite2D.flip_h = true
+		$InteractionComponent/CollisionShape2D.position.x = 10
+		$DamageComponent/CollisionShape2D.position.x = 14.0
 	else:
-		$InteractionComponent.position.x = 10
-		$DamageComponent.position.x = 12
+		$AnimatedSprite2D.flip_h = false
+		$InteractionComponent/CollisionShape2D.position.x = -10
+		$DamageComponent/CollisionShape2D.position.x = -14.0
 		
-	match (state):
-		# if it is idle
+	# does jump and fall animations
+	if (velocity.y < 0):
+		$AnimatedSprite2D.play("jump")
+	elif (velocity.y > 0):
+		$AnimatedSprite2D.play("fall")
+	
+	move_and_slide()
+	
+func stateMachine():
+	match state:
+		# Idle
 		States.IDLE:
-			$AnimatedSprite2D.play("IDLE");
-		# milling about
-		States.IDLEWALKING:
-			$AnimatedSprite2D.play("run");
-		# found the player and is following
-		States.FOLLOWING:
-			$AnimatedSprite2D.play("run");
-			
-			nav.target_position = player.position;
-			var next_path_position = nav.get_next_path_position();
-			var direction = global_position.direction_to(next_path_position);
-			velocity.x = direction.x * speed;
-			
-			if (int(position.x/0.1) == int(prevPos/0.1) and is_on_floor()):
-				velocity.y += JUMP_VELOCITY;
-				print(1)
-			prevPos = position.x
-			
-			
-		# hitting the player
+			$AnimatedSprite2D.play("IDLE")
 		
-		States.HITTING:
-			$AnimatedSprite2D.play("attack");
-			if ($AnimatedSprite2D.frame == 2):
-				attack();
-			velocity.x = 0;
-		
-# attacks
-func attack():
-	$DamageComponent/CollisionShape2D.disabled = false
-	$DisableDamageComponent.start(0.01)
+		# Following
+		States.FOLLOW:
+			$AnimatedSprite2D.play("run")
+			# sets up nav_agent
+			nav_agent_walk.target_position = playerTarget.position
+			
+			# sets up speed
+			speed = 50
+			
+			if (attacking):
+				state = States.ATTACK
+			
+			# basic following
+			var next_path_position = nav_agent_walk.get_next_path_position()
+			var direction = global_position.direction_to(next_path_position)
+			
+			# moves it in that direction
+			if (direction.x < 0):
+				velocity.x = -speed;
+			elif (direction.x > 0):
+				velocity.x = speed;
+			else:
+				velocity.x = 0
+			
+			# is it facing the correct direction to jump
+			var indir = false;
+			if (jumpTarget != Vector2.ZERO):
+				if ((direction.x < 0 and !facingRight) or (direction.x > 0 and facingRight)):
+					indir = true
+				if (is_on_wall()):
+					indir = true
+				
+			var willJump = jumpDecide(indir, next_path_position)
+			
+			# will it jump and activates everything needed
+			if (willJump or jumping):
+				canJump = false
+				jumping = true
+				state = States.JUMP
+				if (is_on_floor()):
+					velocity.y += JUMP_VELOCITY
 
-# decides when the player is within range to attack]
+			
+			
+		States.JUMP:
+			nav_agent_jump.target_position = jumpTarget
+			# speed
+			speed = 200
+			
+			# is it nearing the end target
+			if (int(position.x/10) == int(jumpTarget.x/10)):
+				velocity.x = 20
+			else:
+				
+				# following
+				var next_path_position = nav_agent_jump.get_next_path_position()
+				var direction = global_position.direction_to(next_path_position)
+				
+				# directions
+				if (direction.x < 0):
+					velocity.x = -speed;
+				elif (direction.x > 0):
+					velocity.x = speed;
+				else:
+					velocity.x = 0
+				
+				
+			# it jhas reached its target
+			if (nav_agent_jump.is_target_reached() or is_on_floor()):
+				jumping = false
+				jumpTarget = Vector2.ZERO
+				state = States.FOLLOW
+			
+		# attacking the player
+		States.ATTACK:
+			velocity.x = 0
+			$AnimatedSprite2D.play("attack")
+			
+			if (!attacking):
+				state = States.FOLLOW
+			
+			if ($AnimatedSprite2D.frame == 2):
+				$DamageComponent/CollisionShape2D.disabled = false
+				$DamageTimer.start(0.2)
+			
+		
+# is the guy gonna make the jump
+func jumpDecide(inDirection, nextPos):
+	if ((canJump) and (!jumping) and is_on_floor() and (nextPos.y < position.y - 5) and inDirection):
+		return true
+	else:
+		return false
+
+
+# if player found
 func _on_search_component_found() -> void:
-	state = States.FOLLOWING;
-	player = $SearchComponent.player;
+	playerTarget = $SearchComponent.player
+	state = States.FOLLOW
 
 
 func _on_interaction_component_body_entered(body: Node2D) -> void:
-	state = States.HITTING;
-	
+	if (body.has_method("isPlayer")):
+		attacking = true
 func _on_interaction_component_body_exited(body: Node2D) -> void:
-	state = States.FOLLOWING;
+	if (body.has_method("isPlayer")):
+		attacking = false
 
-# the timer runs out
-func _on_disable_damage_component_timeout() -> void:
+
+func _on_damage_timer_timeout() -> void:
 	$DamageComponent/CollisionShape2D.disabled = true
