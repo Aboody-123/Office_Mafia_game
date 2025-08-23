@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cwhj4hed5y381" path="res://Scenes/platform_large.tscn" id="5_21xkr"]
 [ext_resource type="Texture2D" uid="uid://eap6mgc53qsg" path="res://Assets/Temporary Sprites/Tile Sets/Decorations (32x32).png" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://cwppqqfw6tj2p" path="res://Scenes/diamonds.tscn" id="6_21xkr"]
-[ext_resource type="PackedScene" path="res://Scenes/melee_npc.tscn" id="8_344ge"]
-[ext_resource type="PackedScene" path="res://Scenes/Components/jump_component.tscn" id="9_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://drc4634y48eru" path="res://Scenes/melee_npc.tscn" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://cjdaxnxwx13ne" path="res://Scenes/Components/jump_component.tscn" id="9_ynf5e"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_344ge"]
 vertices = PackedVector2Array(48.8281, -33.0703, 30.0469, -32.4063, 33.1797, -49.5938, 51.4766, -66.5469, 94.9922, 29.3984, 92.9922, 31.1797, 77.2266, 31.9688, 67, 30.9531, 67, 19.8594, 69.5391, 15.7891, 79.2813, 8.22656, 92.0781, 15.7813, 50.5469, -82.2734, 7.71094, -62.3203, 12.2266, -79.7734, 20.8438, -92.2969, 40.3281, -102.563, 126.727, -3.46875, 127.398, -26.2969, 137.578, -24.5, 139.078, -3.5625, 129, 21.5469, 146.711, 31.2266, 135.469, 38.1875, 129, 36.3906, 100.328, 7.53125, 84.7266, -5.40625, 111.594, -32.0469, 94.4922, -58.8281, 106.367, -43.7813, 78.2188, -11.9063, 64.8594, -26.3906, 93.7578, -100.523, 79.6797, -91.1406, 52.9063, -125.633, 66.2422, -137.289, 101.672, -150.703, 141.172, -127.32, 121.352, -158.797, 228.313, -151, 144.133, -189.172, 196.641, -190.977, 222.352, -188.57, 231.578, -168.672)
