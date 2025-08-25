@@ -358,3 +358,5 @@ position = Vector2(-61, -77)
 
 [node name="teleport_node" parent="." instance=ExtResource("9_hptm8")]
 position = Vector2(399, -186)
+
+[connection signal="diamond_collected" from="game_manager" to="Player" method="_on_game_manager_diamond_collected"]

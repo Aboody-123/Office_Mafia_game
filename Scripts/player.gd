@@ -21,6 +21,7 @@ var can_dash = true
 @onready var death_timer = $death_timer
 @onready var death_panel: Control = $"Camera2D/DeathPanelCanvasLayer/death_panel"
 
+signal update_diamond_counter
 
 func _ready() -> void:
 	death_panel.hide()
@@ -42,7 +43,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_health_component_hurt() -> void:
 	print($HealthComponent.health)
-
+	
 
 
 func _on_health_component_dead() -> void:
@@ -85,8 +86,7 @@ func handle_state_transitions():
 		
 		#timer controls length of dash
 		$dash_timer.start()
-		
-		print("dash")
+	
 		can_dash = false
 	
 	# this is for falling through one way platforms
@@ -146,3 +146,7 @@ func _on_death_timer_timeout() -> void:
 
 func drop_through_platform():
 	pass
+
+func _on_game_manager_diamond_collected() -> void:
+	#receives if diamond is collected from the game_manager, then emits signal to UI
+	update_diamond_counter.emit()

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://qckx7uibelm8" path="res://Scripts/pause_menu.gd" id="1_emv3i"]
 
-
 [node name="pause_menu" type="Control"]
 process_mode = 3
 layout_mode = 3
