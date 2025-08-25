@@ -10,6 +10,8 @@ var state = States.IDLE
 var direction 
 var gravity = 9
 var jump_released = false
+@onready var player_hitbox: CollisionShape2D = $CollisionShape2D
+
 
 var dead = false
 
@@ -47,8 +49,9 @@ func _on_health_component_dead() -> void:
 		dead = true
 		death_panel.visible = true
 		Engine.time_scale = 0.5
-		death_timer.start(2)
-	
+		death_timer.start(1.5)
+		
+
 func handle_state_transitions():
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
