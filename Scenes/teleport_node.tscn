@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8crw2m5wuu0l"]
+
+[ext_resource type="Script" uid="uid://cxyr5l60ff5w2" path="res://Scripts/teleport_node.gd" id="1_jgqm2"]
+[ext_resource type="Texture2D" uid="uid://bs1inslnqwmqf" path="res://Assets/Temporary Sprites/Door/Idle.png" id="2_jlwfv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jlwfv"]
+size = Vector2(46, 56)
+
+[node name="teleport_node" type="Area2D"]
+script = ExtResource("1_jgqm2")
+
+[node name="Idle" type="Sprite2D" parent="."]
+position = Vector2(-2, -2)
+texture = ExtResource("2_jlwfv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -2)
+shape = SubResource("RectangleShape2D_jlwfv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

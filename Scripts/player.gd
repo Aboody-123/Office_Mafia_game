@@ -5,24 +5,25 @@ var speed = 150.0
 var dash = 1000.0
 var dash_direction = 1
 const JUMP_VELOCITY = -300.0
-enum States { IDLE, WALKING, DASHING, JUMPING, FALLING }
+enum States { IDLE, WALKING, DASHING, JUMPING, FALLING, PASSTHROUGH}
 var state = States.IDLE
 var direction 
 var gravity = 9
 var jump_released = false
+@onready var teleport_timer: Timer = $teleport_timer
 @onready var player_hitbox: CollisionShape2D = $CollisionShape2D
+@onready var loading_page: Control = $Camera2D/LoadingPageCanvasLayer/loading_page
 
 
 var dead = false
 
 var can_dash = true
 @onready var death_timer = $death_timer
-@onready var death_panel: Control = $"Camera2D/DeathPanelCanvasLayer/Death Panel"
+@onready var death_panel: Control = $"Camera2D/DeathPanelCanvasLayer/death_panel"
 
 
 func _ready() -> void:
 	death_panel.hide()
-
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -88,6 +89,11 @@ func handle_state_transitions():
 		print("dash")
 		can_dash = false
 	
+	# this is for falling through one way platforms
+	if Input.is_action_just_pressed("dropthrough") and is_on_floor():
+		state = States.PASSTHROUGH
+		drop_through_platform()
+	
 func perform_state_actions(delta):
 	match state:
 		States.IDLE:
@@ -116,7 +122,6 @@ func perform_state_actions(delta):
 			pass
 			#add animation
 		
-	
 func _on_dash_timer_timeout() -> void:
 	
 	$dash_cooldown.start()
@@ -135,5 +140,9 @@ func isPlayer():
 
 func _on_death_timer_timeout() -> void:
 	print(1)
+	print("restarting world")
 	Engine.time_scale = 1.0
 	get_tree().reload_current_scene()
+
+func drop_through_platform():
+	pass
